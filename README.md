@@ -1,1 +1,35 @@
 # django-southerncode-test
+
+# TODO
+- Create filters with DjangoFiltersBackend in the viewset
+- Create some rules in the serializer to avoid creating rules with fixed_price or price_modifier without mandatory fields
+- Continue working on the query for calculate_final_price
+- Create tests for the viewset
+
+
+# How to setup the project
+- Create docker image
+```sh
+docker-compose build
+```
+
+- Run docker image
+```sh
+docker-compose up
+```
+
+- Migrate database
+```sh
+docker exec -it django-south python manage.py makemigrations
+docker exec -it django-south python manage.py migrate
+```
+
+- Create superuser (for admin login)
+
+# Play with the API
+- Go to:
+```
+http://127.0.0.1:8000/docs/
+```
+
+Enjoy!
