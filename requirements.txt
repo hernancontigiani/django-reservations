@@ -4,6 +4,6 @@ djangorestframework==3.14.0
 django-rest-auth==0.9.5
 django-cors-headers==3.13.0
 django-filter
-# django-filter==2.4.0
+drf-yasg==1.21.5
 
 
