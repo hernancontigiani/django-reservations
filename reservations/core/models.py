@@ -30,6 +30,14 @@ class PricingRule(models.Model):
     specific_day = models.DateField(null=True, blank=True)
     """specific_day: A rule can apply to a specific date. Ex: Christmas"""
 
+    def __str__(self):
+        return "Rule for property: p {} - price {} - stay {} - fixed {} - day {}".format(
+            self.property_id,
+            self.price_modifier,
+            self.min_stay_length,
+            self.fixed_price,
+            self.specific_day
+        )
 
 class Booking(models.Model):
     """
