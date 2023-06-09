@@ -13,18 +13,28 @@ def calculate_final_price(data):
     base_day_price = data["property"].base_price / total_stay_length
 
     while current_date <= date_end:
-        #print(current_date, total_stay_length)
-        # Get pricing rules order by priority
+        # How query works:
+        # 1) If min_stay_length is null,
+        # specific_day is not null and should be equal to current_date
+        # OR
+        # 2) If specific_day is null,
+        # min_stay_length is not null and should be less than or equal to total_stay_length
+        # OR
+        # 3) If both specific_day and min_stay_length are not null,
+        # both condition must be true
+
+        # How to order by priority:
         # --> first fixed_price (DESC)
         # --> then max min_stay_length (DESC)
         # --> then max price_modifier
-
-        # TODO: The currenty query didnt take into acount yet
-        # that a specifc day have a min_stay_length defined,
-        # also now we are considering that only one rule can apply per day
         pricing_rule = PricingRule.objects.filter(
-            Q(Q(min_stay_length__isnull=True) & Q(specific_day=current_date)) | Q(Q(specific_day__isnull=True) & Q(min_stay_length__lte=total_stay_length)),
-            property=data["property"]
+            Q(Q(min_stay_length__isnull=True) & Q(specific_day=current_date))
+             |
+            Q(Q(specific_day__isnull=True) & Q(min_stay_length__lte=total_stay_length))
+             |
+            Q(Q(specific_day__isnull=False) & Q(min_stay_length__isnull=False) & Q(specific_day=current_date) & Q(min_stay_length__lte=total_stay_length))
+            ,
+            property_id=data["property"].id
         ).order_by(
             '-fixed_price', '-min_stay_length', 'price_modifier', 
         ).first()
