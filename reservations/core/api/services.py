@@ -4,13 +4,13 @@ from ..models import *
 from django.db.models import Q
 
 
-def calculate_final_price(data):
-    current_date = data["date_start"]
-    date_end = data["date_end"]
-    total_stay_length = (date_end - current_date).days
+def calculate_final_price(property_id: int, base_price: float, date_start: datetime, date_end: datetime):
 
+    total_stay_length = (date_end - date_start).days
+    base_day_price = base_price / total_stay_length
+
+    current_date = date_start
     final_price = 0
-    base_day_price = data["property"].base_price / total_stay_length
 
     while current_date <= date_end:
         # How query works:
@@ -34,7 +34,7 @@ def calculate_final_price(data):
              |
             Q(Q(specific_day__isnull=False) & Q(min_stay_length__isnull=False) & Q(specific_day=current_date) & Q(min_stay_length__lte=total_stay_length))
             ,
-            property_id=data["property"].id
+            property_id=property_id
         ).order_by(
             '-fixed_price', '-min_stay_length', 'price_modifier', 
         ).first()

@@ -11,7 +11,6 @@ This app was created just as example of:
 - Create tests for the viewset
 - Use Django 4.0 async properties to improve performance in the
     calculate_final_price method (invoce async each day calculation)
-- Documentation and type hints in the code
 
 
 # How to setup the project

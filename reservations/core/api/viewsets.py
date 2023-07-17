@@ -30,7 +30,12 @@ class BookingViewSet(viewsets.ModelViewSet):
 
         # Validate JSON data and calculate final price
         if serializer.is_valid():
-            data["final_price"] = calculate_final_price(serializer.validated_data)
+            data["final_price"] = calculate_final_price(
+                serializer.validated_data["property"].id,
+                serializer.validated_data["property"].base_price,
+                serializer.validated_data["date_start"],
+                serializer.validated_data["date_end"],
+            )
 
         # Validate calculated data and save
         serializer = self.serializer_class(data=data)
@@ -43,7 +48,4 @@ class BookingViewSet(viewsets.ModelViewSet):
         return Response(
             data=serializer.errors,
             status=status.HTTP_400_BAD_REQUEST
-        )
-
-    
-    
+        ) 
