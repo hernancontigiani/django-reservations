@@ -5,11 +5,6 @@ This app was created just as example of:
 - Filters
 - Complex ORM Querys
 
-# TODO
-- Create tests for the viewset
-- Use Django 4.0 async properties to improve performance in the
-    calculate_final_price method (invoce async each day calculation)
-
 
 # How to setup the project
 - Create docker image
@@ -42,5 +37,10 @@ Default user created:
 root
 12345
 ```
+
+# Test
+```sh
+docker exec -it django-reservations python manage.py test
+```sh
 
 Enjoy!
