@@ -41,6 +41,8 @@ root
 # Test
 ```sh
 docker exec -it django-reservations python manage.py test
-```sh
+```
 
-Enjoy!
+## Thanks!
+Feel free to contact me by mail _hernan4790@gmail.com_ for any doubt.\
+Enjoy :smile:!!
