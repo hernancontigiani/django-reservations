@@ -6,6 +6,9 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
 
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
+
 
 class PropertyViewSet(viewsets.ModelViewSet):
     permission_classes = [] # Pending auth
@@ -23,6 +26,12 @@ class BookingViewSet(viewsets.ModelViewSet):
     permission_classes = [] # Pending auth
     serializer_class = BookingSerializer
     queryset = Booking.objects.all()
+
+    # Filters
+    filter_backends = (DjangoFilterBackend, OrderingFilter)
+    filterset_fields = ('property',)
+    ordering_fields = ('date_start')
+    ordering = ('-date_start',)
 
     def create(self, request):
         data = request.data
