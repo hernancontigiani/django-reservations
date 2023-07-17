@@ -27,8 +27,8 @@ docker-compose up
 
 - Migrate database
 ```sh
-docker exec -it django-south python manage.py makemigrations
-docker exec -it django-south python manage.py migrate
+docker exec -it django-reservations python manage.py makemigrations
+docker exec -it django-reservations python manage.py migrate
 ```
 
 - Create superuser (for admin login)
@@ -37,6 +37,13 @@ docker exec -it django-south python manage.py migrate
 - Go to:
 ```
 http://127.0.0.1:8000/docs/
+```
+
+# Admin
+Default user created:
+```
+root
+12345
 ```
 
 Enjoy!
