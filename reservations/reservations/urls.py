@@ -21,9 +21,6 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 
 description = '''
-<img src="https://media.licdn.com/dms/image/C4D0BAQEoDcRay1vjng/company-logo_200_200/0/1647283602276?e=2147483647&v=beta&t=mh_4cXfdaPARrbA1_kC_4UqmqjBO-XAH3XWGVZ6fu7k">
-</br>
-</br>
 <h2>APIs Doc</h2>
 '''
 
