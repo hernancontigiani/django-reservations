@@ -1,4 +1,4 @@
-from .viewsets import *
+from core.api.viewsets import PropertyViewSet, PricingRuleViewSet, BookingViewSet
 from rest_framework.routers import DefaultRouter
 
 

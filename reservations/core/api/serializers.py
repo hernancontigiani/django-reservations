@@ -1,4 +1,4 @@
-from ..models import *
+from core.models import Property, PricingRule, Booking
 from rest_framework import serializers
 
 

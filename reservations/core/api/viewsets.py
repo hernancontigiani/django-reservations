@@ -1,6 +1,6 @@
-from ..models import *
-from .serializers import *
-from .services import *
+from core.models import Property, PricingRule, Booking
+from core.api.serializers import PropertySerializer, PricingRuleSerializer, BookingSerializer
+from core.api.services import *
 
 from rest_framework import viewsets
 from rest_framework.response import Response
@@ -10,19 +10,19 @@ from rest_framework import status
 class PropertyViewSet(viewsets.ModelViewSet):
     permission_classes = [] # Pending auth
     serializer_class = PropertySerializer
-    queryset = serializer_class.Meta.model.objects.all()
+    queryset = Property.objects.all()
 
 
 class PricingRuleViewSet(viewsets.ModelViewSet):
     permission_classes = [] # Pending auth
     serializer_class = PricingRuleSerializer
-    queryset = serializer_class.Meta.model.objects.all()
+    queryset = PricingRule.objects.all()
 
 
 class BookingViewSet(viewsets.ModelViewSet):
     permission_classes = [] # Pending auth
     serializer_class = BookingSerializer
-    queryset = serializer_class.Meta.model.objects.all()
+    queryset = Booking.objects.all()
 
     def create(self, request):
         data = request.data
