@@ -29,4 +29,4 @@ jobs:
     - name: Run Tests in Container
       run: |
         docker run --name mycontainer -d myimage
-        docker exec mycontainer python manage.py test
+        docker exec -it mycontainer python manage.py test
