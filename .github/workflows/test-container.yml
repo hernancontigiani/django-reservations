@@ -30,3 +30,14 @@ jobs:
       run: |
         docker run --name mycontainer -d myimage
         docker exec mycontainer python manage.py test
+        TEST_EXIT_CODE=$?
+        docker stop mycontainer
+        docker rm mycontainer
+        if [ $TEST_EXIT_CODE -eq 0 ]; then
+          echo "Tests passed!"
+          echo "::set-output name=tests_passed::true"
+        else
+          echo "Tests failed!"
+          echo "::set-output name=tests_passed::false"
+          exit 1
+        fi
