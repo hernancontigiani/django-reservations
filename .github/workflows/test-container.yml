@@ -2,6 +2,8 @@ name: Build Docker Image and Run Tests
 
 on:
   push:
+    branches:
+      - main
 
 env:
   DOCKER_BUILD_CONTEXT: .
@@ -30,6 +32,12 @@ jobs:
       run: |
         docker run --name mycontainer -d myimage
         docker exec mycontainer python manage.py test
-        sleep 5
+        TEST_EXIT_CODE=$?
         docker stop mycontainer
         docker rm mycontainer
+        if [ $TEST_EXIT_CODE -eq 0 ]; then
+          echo "Tests passed!"
+        else
+          echo "Tests failed!"
+          exit 1
+        fi
