@@ -2,6 +2,8 @@ name: Build Docker Image and Run Tests
 
 on:
   push:
+    branches:
+      - main
 
 env:
   DOCKER_BUILD_CONTEXT: .
@@ -35,9 +37,7 @@ jobs:
         docker rm mycontainer
         if [ $TEST_EXIT_CODE -eq 0 ]; then
           echo "Tests passed!"
-          echo "::set-output name=tests_passed::true"
         else
           echo "Tests failed!"
-          echo "::set-output name=tests_passed::false"
           exit 1
         fi
