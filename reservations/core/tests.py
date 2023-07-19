@@ -9,8 +9,7 @@ from rest_framework import status
 
 class PricingRuleAPITestCase(TestCase):
     def setUp(self):
-        # self.url = reverse('pricing-rule')
-        self.url = "/api/v1.0/pricing-rule/"
+        self.url = reverse('pricing-rule-list')
         self.client = APIClient()
 
         self.property = Property.objects.create(
